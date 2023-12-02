@@ -18,36 +18,26 @@ struct Maxes {
 fn part2(input_lines: &str) -> u32 {
     let colors = ["blue", "red", "green"];
     
-    input_lines.lines().filter(|l| !l.trim().is_empty()).map(|line| {
-        let mut maxes = Maxes { r: 0, g: 0, b: 0 };
-        
-        let line_props: Vec<Prop> = line.split(": ").last().unwrap().split("; ").map(|section| {
-            section.split(", ").map(|raw_prop| {
-                let split_prop: Vec<&str> = raw_prop.split(" ").collect();
-                Prop { 
-                    color: split_prop[1].to_string(), 
-                    n: split_prop[0].parse().unwrap()
-                }
-            })
-        }).flatten().collect();
+    input_lines
+        .lines()
+        .filter(|l| !l.trim().is_empty()).map(|line| {
+            let line_props: Vec<Prop> = line.split(": ").last().unwrap().split("; ").flat_map(|section| {
+                section.split(", ").map(|raw_prop| {
+                    let split_prop: Vec<&str> = raw_prop.split(" ").collect();
+                    Prop { 
+                        color: split_prop[1].to_string(), 
+                        n: split_prop[0].parse().unwrap()
+                    }
+                })
+            }).collect();
 
-        
-        for color in colors {
-            let max_n = line_props.iter()
-                .filter(|props| props.color == *color)
-                .max_by_key(|i| i.n)
-                .map_or(0, |i| i.n);
-
-            match color {
-                "blue" => maxes.b = max_n,
-                "red" => maxes.r = max_n,
-                "green" => maxes.g = max_n,
-                _ => {}
-            }
-        }
-
-        maxes.r * maxes.g * maxes.b
-    }).sum()
+            colors.iter().map(|&color| {
+                line_props.iter()
+                    .filter(|prop| prop.color == color)
+                    .max_by_key(|prop| prop.n)
+                    .map_or(0, |prop| prop.n)
+            }).product::<u32>()
+        }).sum()
 }
 
 
