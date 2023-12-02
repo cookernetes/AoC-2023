@@ -6,7 +6,6 @@ fn main() {
 
 // Total allowed for each type: 12 red, 13 green, 14 blue.
 fn part1(input_lines: &str) -> u32 {
-    // Vector of valid game IDs
     let mut valid_games: Vec<u32> = vec![];
 
     for line in input_lines.lines().filter(|l| !l.trim().is_empty()) {
@@ -16,7 +15,6 @@ fn part1(input_lines: &str) -> u32 {
         let props: Vec<Vec<(i8, &str)>> = id_split[1].split("; ").map(|section| {
             section.split(", ").map(|raw_prop| {
                 let split_prop: Vec<&str> = raw_prop.split(" ").collect();
-                // Where `n` is the quantity of said color, and `c` is the color identifier 
                 let n = split_prop[0].parse::<i8>().expect("Quantity is not a digit...?");
                 let c = split_prop[1];
 
