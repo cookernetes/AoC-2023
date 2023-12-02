@@ -9,11 +9,6 @@ struct Prop {
     n: u32
 }
 
-struct Maxes {
-    r: u32,
-    g: u32,
-    b: u32,
-}
 
 fn part2(input_lines: &str) -> u32 {
     let colors = ["blue", "red", "green"];
