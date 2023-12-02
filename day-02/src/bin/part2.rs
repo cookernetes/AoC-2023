@@ -47,7 +47,7 @@ fn part2(input_lines: &str) -> u32 {
         }
 
         maxes.r * maxes.g * maxes.b
-    }).sum::<u32>()
+    }).sum()
 }
 
 
