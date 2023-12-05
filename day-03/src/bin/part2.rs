@@ -2,11 +2,11 @@ use std::collections::HashSet;
 
 fn main() {
     let input_lines = include_str!("./day3.txt");
-    let output = part1(input_lines);
+    let output = part2(input_lines);
     dbg!(output);
 }
 
-fn part1(input_lines: &str) -> i32 {
+fn part2(input_lines: &str) -> i32 {
     let grid: Vec<Vec<char>> = input_lines.lines().map(|line| line.chars().collect()).collect();
 
     let mut total = 0;
@@ -60,7 +60,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = part1("
+        let result = part2("
 467..114..
 ...*......
 ..35..633.
