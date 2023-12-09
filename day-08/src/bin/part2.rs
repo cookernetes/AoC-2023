@@ -106,7 +106,7 @@ LR
 22C = (22Z, 22Z)
 22Z = (22B, 22B)
 XXX = (XXX, XXX)
-");
-// assert_eq!(result, 6)
-}
+        ");
+        assert_eq!(result, 6)
+    }
 }
